@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# VSCode Stage Selected Bug?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Posted as issue on VSCode's Git Repo
 
-Currently, two official plugins are available:
+[https://github.com/microsoft/vscode/issues/220541](https://github.com/microsoft/vscode/issues/220541)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Steps to reproduce below
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Make git repo
+2. For the purposes of recreating this issue, I made a simple Vite app with `npm create vite@latest` and followed the prompts but I'm sure this bug would occur regardless. (**b741e89ca0e17baa083a8ca7c3d89ee80ff9d7b3**)
+3. Make a file (I made a component called `Foo.tsx` at path `/src/components/Foo.tsx`)
+4. Commit this file within VSCode to git (**24cf8662040785c09416671dd64e01aeeba56ffe**)
+5. Either within File Explorer or VSCode's Explorer tab, change the `components` folder to `components_old`
+6. Commit this change to git. (**1cb1809de2109ea59aee9979ed59679c9ad7c89c**)
+7. Not sure if this step is required but make a change to `Foo.tsx`. This can be any change. Commit this change to git. (**37852d2c38825bb26239eb8ff2d2837c720b570a**)
+8. Rename `components_old` to `Components` with a capital **C**.
+9. Commit the subsequent rename of the folder. (**461b08bcbe8ac8dddad0aba8ac88bafb7becde5d**)
+10. Now for the bug, make a change to `Foo.tsx`, now within the `/src/Components` directory
+11. Go to VSCode's Source Control tab and click **Stage Block** on (at least) one change. (I commited the incorrect change VSCode staged here: **ea0e11cb1506cf8624cb6dac82a2c57be42513e8**)
+12. Observe in the Source Control panel, the same issue described in my OP
