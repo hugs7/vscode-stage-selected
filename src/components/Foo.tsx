@@ -8,8 +8,13 @@ type FooProps = {
     moreText?: string;
 };
 
-const Foo: React.FC<FooProps> = ({ text }) => {
-    return <div style={{ backgroundColor: "dodgerblue" }}>{text}</div>;
+const Foo: React.FC<FooProps> = ({ text, moreText }) => {
+    return (
+        <div style={{ backgroundColor: "dodgerblue", border: "1px solid white" }}>
+            <div>{text}</div>
+            <div>{moreText ? moreText : "No more text"}</div>
+        </div>
+    );
 };
 
 export default Foo;
