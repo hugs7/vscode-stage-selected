@@ -8,7 +8,7 @@ type FooProps = {
 };
 
 const Foo: React.FC<FooProps> = ({ text }) => {
-    return <div>{text}</div>;
+    return <div style={{ backgroundColor: "dodgerblue" }}>{text}</div>;
 };
 
 export default Foo;
